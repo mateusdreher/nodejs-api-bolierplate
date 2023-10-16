@@ -1,0 +1,154 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+	  "title": "Node API Bolierplate",
+	  "description": "Bolierplate to nodejs apis",
+	  "version": "1.0.0"
+	},
+	"paths": {
+	  "/users/login": {
+		"post": {
+		  "description": "User login",
+		  "requestBody": {
+			"description": "Request a JWT token",
+			"content": {
+			  "application/json": {
+				"schema": {
+				  "$ref": "#/components/schemas/Login"
+				}
+			  }
+			}
+		  },
+		  "responses": {
+			"200": {
+			  "description": "User successfully logged in",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"type": "object",
+					"properties": {
+					  "token": {
+						"type": "string",
+						"example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+					  }
+					}
+				  }
+				}
+			  }
+			},
+			"404": {
+			  "description": "User not found",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"$ref": "#/components/schemas/ErrorNotFound"
+				  }
+				}
+			  }
+			},
+			"401": {
+			  "description": "Invalid email or password",
+			  "content": {
+				"application/json": {
+				  "schema": {
+					"$ref": "#/components/schemas/ErrorUnauthorized"
+				  }
+				}
+			  }
+			}
+		  }
+		}
+	  }
+	},
+	"components": {
+	  "schemas": {
+		"Login": {
+		  "type": "object",
+		  "properties": {
+			"email": {
+			  "type": "string",
+			  "example": "contato@mateusdreher.com.br"
+			},
+			"password": {
+			  "type": "string",
+			  "example": "-?(K-%$YrvKY"
+			}
+		  }
+		},
+		"ErrorUnprocessableEntity": {
+		  "type": "object",
+		  "properties": {
+			"errorType": {
+			  "type": "string",
+			  "example": "UnprocessableEntity"
+			},
+			"message": {
+			  "type": "string",
+			  "example": "Review your payload"
+			}
+		  }
+		},
+		"ErrorConflict": {
+		  "type": "object",
+		  "properties": {
+			"errorType": {
+			  "type": "string",
+			  "example": "Conflict"
+			},
+			"message": {
+			  "type": "string",
+			  "example": "Resource already exists"
+			}
+		  }
+		},
+		"ErrorNotFound": {
+		  "type": "object",
+		  "properties": {
+			"errorType": {
+			  "type": "string",
+			  "example": "NotFound"
+			},
+			"message": {
+			  "type": "string",
+			  "example": "Resource not found"
+			}
+		  }
+		},
+		"ErrorUnauthorized": {
+		  "type": "object",
+		  "properties": {
+			"errorType": {
+			  "type": "string",
+			  "example": "Unauthorized"
+			},
+			"message": {
+			  "type": "string",
+			  "example": "Invalid credentials"
+			}
+		  }
+		},
+		"ErrorForbidden": {
+		  "type": "object",
+		  "properties": {
+			"errorType": {
+			  "type": "string",
+			  "example": "Forbidden"
+			},
+			"message": {
+			  "type": "string",
+			  "example": "You do not have sufficient permissions to perform this action"
+			}
+		  }
+		}
+	  },
+	  "securitySchemes": {
+		"bearerAuth": {
+		  "description": "Bearer token authentication using JWT",
+		  "type": "http",
+		  "scheme": "bearer",
+		  "bearerFormat": "JWT"
+		}
+	  }
+	}
+  }
+  
