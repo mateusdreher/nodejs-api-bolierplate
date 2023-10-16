@@ -45,18 +45,19 @@ To start using this Node API boilerplate, follow these steps:
 
 2. Navigate to the project folder:
 	```
-		cd your-repository
+	cd your-repository
 3. Provide execute permission to the setup script:
 	```
-			chmod +x setup.sh
+	chmod +x setup.sh
 4. Run the script:
 	```
-		./start.sh
+	./start.sh
 	```
 	or
 
 	```
-			sh start.sh
+	sh start.sh
+ 	```
 
 
 The script will containerize both the application and the database and ensure communication between them. You will receive a link containing the container's IP to access the application.
